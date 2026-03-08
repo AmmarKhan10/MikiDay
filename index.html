@@ -8,14 +8,17 @@
         /* Base Styling */
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px 0; /* Added a little padding so the card doesn't touch the edges when scrolling */
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            
+            /* CHANGE MADE HERE: Changed 'hidden' to 'auto' to allow vertical scrolling */
+            overflow-x: hidden; 
+            overflow-y: auto;
         }
 
         /* Glassmorphism Card */
@@ -30,6 +33,7 @@
             width: 90%;
             z-index: 10;
             animation: fadeIn 1.5s ease-in-out;
+            margin: auto; /* Ensures it stays centered even when the page is long */
         }
 
         /* Typography */
@@ -81,7 +85,7 @@
 
         /* Floating Hearts Animation */
         .heart {
-            position: absolute;
+            position: fixed; /* Changed to fixed so they don't move with the scroll */
             color: #ff4081;
             font-size: 24px;
             animation: floatUp 3s ease-in forwards;
@@ -102,7 +106,7 @@
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-200px) scale(1.5); }
+            100% { opacity: 0; transform: translateY(-120vh) scale(1.5); }
         }
     </style>
 </head>
@@ -123,15 +127,12 @@
 
     <script>
         function revealSurprise() {
-            // Show the hidden message
             const message = document.getElementById('surpriseMessage');
             message.style.display = 'block';
 
-            // Hide the button after clicking
             const button = document.getElementById('surpriseBtn');
             button.style.display = 'none';
 
-            // Create floating hearts
             createHearts();
         }
 
@@ -142,18 +143,16 @@
                     heart.innerHTML = '❤️';
                     heart.classList.add('heart');
 
-                    // Randomize position and size
                     heart.style.left = Math.random() * 100 + 'vw';
                     heart.style.top = '100vh';
                     heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
 
                     document.body.appendChild(heart);
 
-                    // Remove heart from DOM after animation finishes
                     setTimeout(() => {
                         heart.remove();
                     }, 3000);
-                }, i * 100); // Stagger the creation of hearts
+                }, i * 100);
             }
         }
     </script>
