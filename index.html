@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Women's Day!</title>
+    <style>
+        /* Base Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Card */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            z-index: 10;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Typography */
+        h1 {
+            color: #d81b60;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+
+        p.subtitle {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Interactive Button */
+        button {
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4);
+        }
+
+        button:hover {
+            background-color: #ad144b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.6);
+        }
+
+        /* Hidden Surprise Message */
+        #surpriseMessage {
+            display: none;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ff9a9e;
+            color: #d81b60;
+            font-weight: 500;
+            font-size: 1.2em;
+            font-style: italic;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: #ff4081;
+            font-size: 24px;
+            animation: floatUp 3s ease-in forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-200px) scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Happy Women's Day, My Love!</h1>
+
+        <p class="subtitle">To the most prettiest and most amazing girl ive ever met and had the pleasure to spend my life with. im sorry fot being annoying and for all the times i made you upset. I genuinely love you more then anything and ill do anything to make you happy. Im sorry u had to ask me to make you something, i didnt know ke it meant so much to you people around me dont really celebrate it which is why i didnt even knew rhe importance of it mot the date. I spent my day making you this anf i hope youll forgive me and ill make sure next year you get something amazing.
+        </p>
+
+        <button id="surpriseBtn" onclick="revealSurprise()">Click for a Surprise ❤️</button>
+
+        <div id="surpriseMessage">
+            I am so lucky to be yours. Always be yourself becuz i love Maman for who she is.
+        </div>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            // Show the hidden message
+            const message = document.getElementById('surpriseMessage');
+            message.style.display = 'block';
+
+            // Hide the button after clicking
+            const button = document.getElementById('surpriseBtn');
+            button.style.display = 'none';
+
+            // Create floating hearts
+            createHearts();
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.classList.add('heart');
+
+                    // Randomize position and size
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '100vh';
+                    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+
+                    document.body.appendChild(heart);
+
+                    // Remove heart from DOM after animation finishes
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 100); // Stagger the creation of hearts
+            }
+        }
+    </script>
+
+</body>
+</html>
